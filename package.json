@@ -1,0 +1,22 @@
+{
+  "name": "node-red-contrib-dashboard-average-bars",
+  "version": "0.0.1",
+  "description": "Calculate and display the average values of msg.payload in a bar chart.",
+  "homepage": "https://github.com/nazcasun/node-red-contrib-dashboard-average-bars",
+  "author": "Fred Huard",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nazcasun/node-red-contrib-dashboard-average-bars.git"
+  },
+  "node-red": {
+    "nodes": {
+      "average-bars": "average-bars.js"
+    }
+  },
+  "keywords": [
+    "node-red",
+    "dashboard",
+    "chart"
+  ],
+}

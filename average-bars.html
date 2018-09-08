@@ -1,0 +1,166 @@
+<script type="text/javascript">
+  RED.nodes.registerType('average-bars', {
+    category: 'dashboard',
+    color: '#3FADB5',
+    defaults: {
+      name: { value: 'average-bars' },
+      title: { value: '' },
+      period: { value: 'day' },
+      showBarsValue: { value: true },      
+      showScaleValue: { value: true },        
+      showLastValue: { value: true },
+      showAverageValue: { value: true },
+      showMinimumValue: { value: true },
+      showMaximumValue: { value: true },
+      maxBar: { value: 30 , validate:RED.validators.number() },
+      topColor: { value: '#FF0000' },
+      bottomColor: { value: '#FFFF00' },
+      unit: { value: '' },
+      fontColor: { value: '#AAAAAA' },     
+      barStyle: { value: 'Rectangle' } ,
+      decimal: { value: 1 }      
+    },
+    credentials: {
+
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'ui_template.png',
+    align: 'right',
+    label: function() {
+      return this.name || 'average-bars';
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="average-bars">
+	
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Node name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  
+  <div class="form-row">
+      <label for="node-input-title"><i class="fa fa-tag"></i> Title</label>
+      <input type="text" id="node-input-title" placeholder="msg.topic">
+  </div>
+  
+  <div class="form-row">
+      <label for="node-input-period"><i class="fa fa-bar-chart"></i> x-axis</label>
+      <select id="node-input-period">
+		  <option value='hour'>last hour</option>
+		  <option value='day'>last day</option>
+		  <option value='week'>last week</option>
+		  <option value='month'>last month</option>		  
+		  <option value='year'>last year</option>		
+		  <option value='topic'>msg.topic</option>			  	  
+	  </select>	  
+  </div>  
+  
+  <hr>
+  
+  <div class="form-row">
+      <label for="node-input-barStyle</label>"><i class="fa fa-bars"></i> Bar style</label>
+      <select id="node-input-barStyle">
+		  <option value='Rectangle'>rectangle</option>
+		  <option value='Equalizer'>equalizer</option>	  	  
+	  </select>	  
+  </div>    
+  
+  <div class="form-row">
+      <label for="node-input-maxBar"><i class="fa fa-arrows-v"></i> Bar lines</label>
+      <input type="text" id="node-input-maxBar" placeholder="30" style="width:50px">
+  </div>
+  
+  <div class="form-row">
+      <label for="node-input-topColor"><i class="fa fa-paint-brush"></i> Bar colors</label>
+      top <input type="color" id="node-input-topColor" class="gauge-color"/>
+      bottom <input type="color" id="node-input-bottomColor" class="gauge-color"/>
+  </div>
+  
+  <hr>
+  
+  <div class="form-row" align=left>
+      <label><i class="fa fa-eye-slash"></i> Display values</label>
+      <div>&nbsp;&nbsp;<input type="checkbox" id="node-input-showBarsValue" checked style="display:inline-block; width:20px; vertical-align:baseline;">&nbsp;bar values</div>     
+      <div>&nbsp;&nbsp;<input type="checkbox" id="node-input-showScaleValue" checked style="display:inline-block; width:20px; vertical-align:baseline;">&nbsp;x-axis values</div>     
+      <div>&nbsp;&nbsp;<input type="checkbox" id="node-input-showLastValue" checked style="display:inline-block; width:20px; vertical-align:baseline;">&nbsp;last value</div>
+      <div>&nbsp;&nbsp;<input type="checkbox" id="node-input-showAverageValue" checked style="display:inline-block; width:20px; vertical-align:baseline;">&nbsp;chart average</div>
+      <div>&nbsp;&nbsp;<input type="checkbox" id="node-input-showMinimumValue" checked style="display:inline-block; width:20px; vertical-align:baseline;">&nbsp;chart minimum</div>
+      <div>&nbsp;&nbsp;<input type="checkbox" id="node-input-showMaximumValue" checked style="display:inline-block; width:20px; vertical-align:baseline;">&nbsp;chart maximum</div>
+  </div>
+  
+  <div class="form-row">
+      <label for="node-input-unit"><i class="fa fa-bookmark-o"></i> Unit</label>
+      <input type="text" id="node-input-unit" style="width:50px" />
+  </div>
+  
+  <div class="form-row">
+      <label for="node-input-decimal"><i class="fa fa-tachometer"></i> Decimals</label>
+      <select id="node-input-decimal">
+		  <option value='0'>0</option>
+		  <option value='1'>1</option>	 
+		  <option value='2'>2</option>			   	  
+	  </select>	  
+  </div>  
+  
+  <div class="form-row">
+      <label for="node-input-fontColor"><i class="fa fa-paint-brush"></i> Font color</label>
+      <input type="color" id="node-input-fontColor"  class="gauge-color"/>
+  </div>  
+
+</script>
+
+<script type="text/x-red" data-help-name="average-bars">
+  <p>Calculate and display the average values of <code>msg.payload</code> in a bar chart.</p>
+  <dl>Important<dd>The average-bars node is simply and necessarily linked to the node-red dashboard template node.
+    The average-bars node create the input msg of the template node and the template node display the chart.</dd>
+  </dl>
+
+  <h3>Note</h3>
+    <dl class="message-properties">
+      <dd> Average-bars node values can be cleared by sending the string "clear" in the msg.payload.
+        <br>
+        Node-red reboot: keep the node values by storing the context values ( see <code>contextStorage</code> attribute in settings.js )
+      </dd>  
+    </dl>
+
+  <h3>Node properties :</h3>
+    <dl class="message-properties">
+      <dt>X-axis
+        <dd>
+  <li>last hour : 1 bar per minute</li> 
+  <li>last day : 1 bar per hour</li>   
+  <li>last week : 1 bar per day</li>   
+  <li>last month : 1 bar per day </li>   
+  <li>last year : 1 bar per month</li>   
+  <li>msg.topic : 1 bar for each msg.topic</li>   
+  </dd>
+  </dt>
+  <dt>Y-axis
+   <dd>is calculated according to the msg.payload received.</dd>
+  </dt>  
+  <dt>Bar style
+  <dd>
+  <li>rectangle : classical bar</li>
+  <li>equalizer : equalizer bar style</li>
+  </dd
+  </dt>
+  <dt>Bar colors
+  <dd>choice the color gradient of the bars</dd>
+  </dt>
+  <dt>Display values
+  <dd>check boxes to display or hide values :
+  <li>bar values : value above the bar </li>
+  <li>x-axis values : period values (or msg.topic if x-axis = msg.topic )</li>
+  <li>last value : the last msg.payload received</li>
+  <li>chart average : the average of all values received</li>
+  <li>chart minimum : the minimum of all values received</li>
+  <li>chart maximum : the maximum of all values received</li>
+  </dd>
+  </dt>
+  <dt>Unit<dd>unit to display behind values</dd></dt>
+  <dt>Decimals<dd>number of decimals to display</dd></dt>
+  <dt>Font color<dd>color of the scale and the values</dd></dt>
+  </dl>
+</script>
