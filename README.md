@@ -11,6 +11,7 @@ Node-red reboot: keep the node values by storing the context values ( see contex
 
 
 Node properties :
+
 X-axis :
 - last hour : 1 bar per minute
 - last day : 1 bar per hour
