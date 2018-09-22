@@ -1,17 +1,28 @@
 # node-red-contrib-dashboard-average-bars
 Calculate and display the average values of msg.payload in a bar chart.
 
-Important :
-The average-bars node is simply and necessarily linked to the node-red dashboard template node. The average-bars node create the input msg of the template node and the template node display the chart.
+<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars2.PNG"/>
+
+<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars3.PNG"/>
 
 
-Note :
-Average-bars node values can be cleared by sending the string "clear" in the msg.payload. 
-Node-red reboot: keep the node values by storing the context values ( see contextStorage attribute in settings.js )
+## Pre-requisites :
+node-red-contrib-dashboard-average-bars requires node-red-dashboard.
+The average-bars node is necessarily linked to the node-red dashboard template node. The average-bars node create the input msg of the template node and the template node display the chart.
 
+<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars1.PNG"/>
 
-Node properties :
+## Releases :
+Version 0.0.3 : 
+- The top and the bottom values of the Y-axis can be forced.
 
+Version 0.0.2 :
+- First published version
+
+Version 0.0.1 :
+- Beta
+
+## Node properties :
 X-axis :
 - last hour : 1 bar per minute
 - last day : 1 bar per hour
@@ -20,7 +31,8 @@ X-axis :
 - last year : 1 bar per month
 - msg.topic : 1 bar for each msg.topic
   
-Y-axis : is calculated according to the msg.payload received.
+Y-axis : 
+- "auto" : y-axis is calculated according to the msg.payload received.
 
 Bar style :
 - rectangle : classical bar
@@ -41,3 +53,7 @@ Unit : unit to display behind values
 Decimals : number of decimals to display
 
 Font color : color of the scale and the values
+
+## Note :
+- Average-bars node values can be cleared by sending the string "clear" in the msg.payload. 
+- Node-red reboot : keep the node values by storing the context values ( see contextStorage attribute in settings.js )
