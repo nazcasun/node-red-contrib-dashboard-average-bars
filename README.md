@@ -13,11 +13,13 @@ The average-bars node is necessarily linked to the node-red dashboard template n
 <img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars1.PNG"/>
 
 ## Releases :
-Release 0.0.3 : 
+Version 0.0.3 : 
 - The top and the bottom values of the Y-axis can be forced.
-Release 0.0.2 :
+
+Version 0.0.2 :
 - First published version
-Release 0.0.1 :
+
+Version 0.0.1 :
 - Beta
 
 ## Node properties :
@@ -29,7 +31,8 @@ X-axis :
 - last year : 1 bar per month
 - msg.topic : 1 bar for each msg.topic
   
-Y-axis : is calculated according to the msg.payload received.
+Y-axis : 
+- "auto" : y-axis is calculated according to the msg.payload received.
 
 Bar style :
 - rectangle : classical bar
@@ -52,5 +55,5 @@ Decimals : number of decimals to display
 Font color : color of the scale and the values
 
 ## Note :
-Average-bars node values can be cleared by sending the string "clear" in the msg.payload. 
-Node-red reboot: keep the node values by storing the context values ( see contextStorage attribute in settings.js )
+- Average-bars node values can be cleared by sending the string "clear" in the msg.payload. 
+- Node-red reboot : keep the node values by storing the context values ( see contextStorage attribute in settings.js )
