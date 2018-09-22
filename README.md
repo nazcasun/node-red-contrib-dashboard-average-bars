@@ -13,14 +13,12 @@ The average-bars node is necessarily linked to the node-red dashboard template n
 <img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars1.PNG?raw=true"/>
 
 ## Releases :
-Version 0.0.3 : 
+Version 0.0.4 : 
 - The top and the bottom values of the Y-axis can be forced.
 
 Version 0.0.2 :
 - First published version
 
-Version 0.0.1 :
-- Beta
 
 ## Node properties :
 X-axis :
