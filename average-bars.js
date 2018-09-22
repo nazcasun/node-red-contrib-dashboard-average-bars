@@ -6,6 +6,8 @@ module.exports = function(RED) {
       this.on('input', function(msg) {
         this.title = config.title || msg.topic;
         this.period = config.period || 'day';
+        this.yMin = config.yMin || 'auto';        
+        this.yMax = config.yMax || 'auto';          
         this.showBarsValue = config.showBarsValue;     
         this.showScaleValue = config.showScaleValue;             
         this.showLastValue = config.showLastValue;
@@ -284,8 +286,15 @@ var maximumValue = maximum;
 averageValue = Math.round(averageValue/averageCount*roundValue)/roundValue;
 
 // min & max of the scale
-minimum = Math.floor(minimum-(minimum*0.01));
-maximum = Math.ceil(maximum+(maximum*0.01));
+if (myNode.yMin == 'auto')
+	minimum = Math.floor(minimum-(minimum*0.01));
+else
+	minimum = myNode.yMin;
+	
+if (myNode.yMax == 'auto')	
+	maximum = Math.ceil(maximum+(maximum*0.01));
+else
+	maximum = myNode.yMax;
 
 
 // ---------------------------------------------------
@@ -350,7 +359,8 @@ else
 // Calculate each bars
 for(var i=0 ; i<numberOfBars ; i++) {
 
-    if ((myNode.period=='topic') || (myNode.period=='moonth'))
+    // Find the good bar in the array
+    if (myNode.period=='topic') 
       msg.payload.bar[i]=i;
     else { 
       msg.payload.bar[i]=currentBar+i+1;
@@ -358,13 +368,21 @@ for(var i=0 ; i<numberOfBars ; i++) {
         msg.payload.bar[i]=msg.payload.bar[i]-numberOfBars;
     }
 
+    // Calculate the average and the number of lines of each bars
     if ((average[msg.payload.bar[i]]=='undefined') || (isNaN(average[msg.payload.bar[i]]))) {
         msg.payload.average[i]='';  
         msg.payload.number[i]=0;
     }
     else {
-        msg.payload.average[i]=average[msg.payload.bar[i]];            
-        msg.payload.number[i]=Math.round((msg.payload.average[i]-minimum)/(maximum-minimum)*maxBar);            
+        msg.payload.average[i]=average[msg.payload.bar[i]];    
+        if (msg.payload.average[i] > maximum)
+          msg.payload.number[i] = maxBar;
+        else {
+          if (msg.payload.average[i] < minimum)
+            msg.payload.number[i] = 0;
+          else      
+            msg.payload.number[i] = Math.round((msg.payload.average[i]-minimum)/(maximum-minimum)*maxBar); 
+        }           
     }
 
 }
