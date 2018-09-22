@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-dashboard-average-bars",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Calculate and display the average values of msg.payload in a bar chart.",
   "homepage": "https://github.com/nazcasun/node-red-contrib-dashboard-average-bars",
   "author": "Fred Huard",
