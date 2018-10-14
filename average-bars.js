@@ -446,13 +446,11 @@ msg.template = '\
         </td>\
         <td width="{{msg.payload.barWidth}}" align=center ng-repeat="x in msg.payload.bar track by $index" >\
             <div style="display:{{msg.payload.showBarsValue}};font-size:{{msg.payload.barFontSize}};color:{{msg.payload.colors[msg.payload.number[$index]]}}">{{msg.payload.average[$index]}}</div>\
-            <div ng-init="max=msg.payload.number[$index]">\
                <md-tooltip md-direction="top">{{msg.payload.barLongName[msg.payload.bar[$index]]}} : {{msg.payload.average[$index]}}{{msg.payload.unit}}</md-tooltip>\
-               <div ng-repeat="c in msg.payload.colors | limitTo : max">\
+               <div ng-repeat="c in msg.payload.colors | limitTo : msg.payload.number[$index] track by $index">\
                     <div class="miniline{{msg.payload.barStyle}}">&nbsp;</div>\
-                    <div class="minibar{{msg.payload.barStyle}}" style="background-color:{{msg.payload.colors[max-$index]}}">&nbsp;</div>\
+                    <div class="minibar{{msg.payload.barStyle}}" style="background-color:{{msg.payload.colors[msg.payload.number[$parent.$index]-$index]}}">&nbsp;</div>\
                 </div>\
-            </div>\
             <div class="miniline{{msg.payload.barStyle}}">&nbsp;</div>\
             <div class="bottomline">&nbsp;</div>\
             <div  style="visibility:{{msg.payload.showScaleValue}};font-size:{{msg.payload.scaleFontSize}};">{{msg.payload.barName[msg.payload.bar[$index]]}}</div>\
