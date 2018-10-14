@@ -1,26 +1,27 @@
 # node-red-contrib-dashboard-average-bars
 Calculate and display the average values of msg.payload in a bar chart.
 
-<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars2.PNG"/>
+<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars2.PNG?raw=true"/>
 
-<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars3.PNG"/>
+<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars3.PNG?raw=true"/>
 
 
 ## Pre-requisites :
 node-red-contrib-dashboard-average-bars requires node-red-dashboard.
 The average-bars node is necessarily linked to the node-red dashboard template node. The average-bars node create the input msg of the template node and the template node display the chart.
 
-<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars1.PNG"/>
+<img src="https://github.com/nazcasun/node-red-contrib-dashboard-average-bars/blob/master/examples/average-bars1.PNG?raw=true"/>
 
 ## Releases :
-Version 0.0.3 : 
+Version 0.0.6 : 
+- Fixed bug : wrong bar height when dashboard automatically refresh
+
+Version 0.0.5 : 
 - The top and the bottom values of the Y-axis can be forced.
 
 Version 0.0.2 :
 - First published version
 
-Version 0.0.1 :
-- Beta
 
 ## Node properties :
 X-axis :
